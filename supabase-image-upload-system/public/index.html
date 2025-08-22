@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Galería Supabase</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <h1 class="brand">Galería</h1>
+      <div id="auth-area" class="auth-area"></div>
+    </header>
+
+    <section id="upload-section" class="card hidden">
+      <h2>Subir imagen</h2>
+      <input id="title" placeholder="Título (opcional)" />
+      <input id="file" type="file" accept="image/*" />
+      <button id="upload-btn" class="btn">Subir</button>
+    </section>
+
+    <section id="gallery"></section>
+  </main>
+
+  <!-- Modal auth -->
+  <div id="auth-modal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-title">Iniciar sesión</h3>
+        <button id="close-modal" class="icon-btn">✕</button>
+      </div>
+
+      <div class="tabs">
+        <button id="tab-login" class="tab active">Entrar</button>
+        <button id="tab-register" class="tab">Registrar</button>
+      </div>
+
+      <form id="auth-form" class="form">
+        <input id="auth-email" type="email" placeholder="Correo electrónico" required />
+        <input id="auth-pass" type="password" placeholder="Contraseña (6+ car.)" required minlength="6" />
+        <div id="auth-feedback" class="small muted"></div>
+        <button id="auth-submit" class="btn block">Continuar</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
