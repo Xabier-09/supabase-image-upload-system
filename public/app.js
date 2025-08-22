@@ -93,12 +93,16 @@ authForm.onsubmit = async (e) => {
     
     // Registrar el registro exitoso en nuestra tabla personalizada
     if (data.user) {
-      await supabase.from('user_registrations').insert([
-        {
-          user_id: data.user.id,
-          registration_method: 'email'
-        }
-      ]);
+      try {
+        // Usar la función security definer para evitar problemas de RLS
+        await supabase.rpc('track_user_registration', {
+          p_user_id: data.user.id,
+          p_registration_method: 'email'
+        });
+      } catch (error) {
+        console.warn('Error tracking registration (non-critical):', error.message);
+        // Este error no debe impedir el registro exitoso
+      }
     }
     
     authFeedback.textContent = 'Registro enviado. Revisa tu correo si es necesario.';

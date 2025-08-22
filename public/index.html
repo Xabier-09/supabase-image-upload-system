@@ -3,48 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Galería Supabase</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>🎨 Galería de Imágenes - Supabase</title>
+  <meta name="description" content="Comparte y descubre imágenes increíbles con nuestro sistema de galería con Supabase">
+  <link rel="stylesheet" href="styles-enhanced.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <main class="container">
-    <header class="topbar">
-      <h1 class="brand">Galería</h1>
-      <div id="auth-area" class="auth-area"></div>
-    </header>
-
-    <section id="upload-section" class="card hidden">
-      <h2>Subir imagen</h2>
-      <input id="title" placeholder="Título (opcional)" />
-      <input id="file" type="file" accept="image/*" />
-      <button id="upload-btn" class="btn">Subir</button>
-    </section>
-
-    <section id="gallery"></section>
-  </main>
-
-  <!-- Modal auth -->
-  <div id="auth-modal" class="modal hidden">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 id="modal-title">Iniciar sesión</h3>
-        <button id="close-modal" class="icon-btn">✕</button>
-      </div>
-
-      <div class="tabs">
-        <button id="tab-login" class="tab active">Entrar</button>
-        <button id="tab-register" class="tab">Registrar</button>
-      </div>
-
-      <form id="auth-form" class="form">
-        <input id="auth-email" type="email" placeholder="Correo electrónico" required />
-        <input id="auth-pass" type="password" placeholder="Contraseña (6+ car.)" required minlength="6" />
-        <div id="auth-feedback" class="small muted"></div>
-        <button id="auth-submit" class="btn block">Continuar</button>
-      </form>
-    </div>
+  <div id="app" class="container">
+    <!-- App content will be rendered by JavaScript -->
   </div>
 
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app-enhanced.js"></script>
 </body>
 </html>
