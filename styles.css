@@ -1,0 +1,32 @@
+:root{--bg:#0b1220;--card:#0f1724;--muted:#9aa4b2;--accent:#7c5cff;--glass:rgba(255,255,255,0.04)}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial;background:linear-gradient(180deg,#051220,#081428);color:#e6eef6}
+.container{max-width:1024px;margin:28px auto;padding:20px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.brand{font-size:20px;letter-spacing:0.6px}
+.auth-area{display:flex;gap:8px;align-items:center}
+.card{background:var(--card);padding:16px;border-radius:14px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+.hidden{display:none}
+#upload-section input[type=file]{display:block;margin-top:8px}
+.btn{background:linear-gradient(180deg,var(--accent),#5a3dff);border:0;padding:10px 12px;border-radius:10px;color:white;cursor:pointer}
+.block{display:block;width:100%}
+#gallery{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.item{border-radius:12px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+.item img{width:100%;height:170px;object-fit:cover;display:block}
+.meta{padding:10px}
+.small{font-size:13px;color:var(--muted)}
+.controls{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.rating{display:flex;gap:6px;align-items:center}
+.star{cursor:pointer;padding:6px;user-select:none}
+.icon-btn{background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:16px}
+
+/* Modal */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(2,6,23,0.45),rgba(2,6,23,0.6));backdrop-filter:blur(6px);z-index:60}
+.modal-card{width:360px;background:var(--card);border-radius:12px;padding:14px;box-shadow:0 12px 40px rgba(2,6,23,0.7)}
+.modal-header{display:flex;justify-content:space-between;align-items:center}
+.tabs{display:flex;gap:8px;margin-top:12px}
+.tab{flex:1;padding:8px;border-radius:8px;background:var(--glass);border:1px solid rgba(255,255,255,0.02);cursor:pointer}
+.tab.active{background:linear-gradient(180deg,rgba(124,92,255,0.16),rgba(124,92,255,0.08));border:1px solid rgba(124,92,255,0.3)}
+.form{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.form input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+.muted{color:var(--muted)}
