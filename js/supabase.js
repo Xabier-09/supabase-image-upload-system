@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Supabase Configuration
 // Note: Create a config.js file with your actual Supabase credentials
 // Use config.example.js as a template
@@ -251,3 +252,19 @@ if (error) {
 
 // Export the service
 window.SupabaseService = SupabaseService;
+=======
+// js/supabase.js
+// Replace the placeholders with your project's values.
+const SUPABASE_URL = 'https://jdtkgjunxdspmgbbmsdq.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpkdGtnanVueGRzcG1nYmJtc2RxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4ODU0NjYsImV4cCI6MjA3MTQ2MTQ2Nn0.mIN1BHien_ldObRWmWSTqZztK6byhFAx9uxOJUnDgqo';
+
+// Create client (UMD uses global supabaseJs.createClient)
+if (typeof supabaseJs !== 'undefined' && typeof supabaseJs.createClient === 'function') {
+  window.supabase = supabaseJs.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+} else if (typeof createClient === 'function') {
+  window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+} else {
+  console.error('Supabase client not found. Ensure @supabase/supabase-js is loaded.');
+  window.supabase = null;
+}
+>>>>>>> d5cd62e (Actualizado)

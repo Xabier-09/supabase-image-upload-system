@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -180,5 +181,86 @@
     <script src="js/favorites.js"></script>
     <script src="js/search.js"></script>
     <script src="js/app.js"></script>
+=======
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nova Gallery — Supabase Image Platform</title>
+  <meta name="description" content="Nova Gallery: upload, rate, comment and favorite images. Built with Supabase." />
+  <link rel="icon" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Supabase JS (UMD) via CDN (replace if you bundle) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
+</head>
+<body class="light">
+  <header class="topbar">
+    <div class="brand">Nova Gallery</div>
+    <div class="search-wrap">
+      <input id="searchInput" type="search" placeholder="Search images, tags, users..." />
+      <select id="sortSelect" aria-label="Sort">
+        <option value="newest">Newest</option>
+        <option value="top">Top rated</option>
+      </select>
+    </div>
+    <div class="actions">
+      <button id="themeToggle" title="Toggle dark mode">🌙</button>
+      <button id="authBtn">Login / Register</button>
+      <button id="uploadBtn" class="primary">Upload</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <aside class="sidebar">
+      <h3>Filters</h3>
+      <div>
+        <label>Min rating
+          <select id="minRating">
+            <option value="0">Any</option>
+            <option value="1">1★+</option>
+            <option value="2">2★+</option>
+            <option value="3">3★+</option>
+            <option value="4">4★+</option>
+          </select>
+        </label>
+      </div>
+      <h4>Favorites</h4>
+      <div id="favoritesList"></div>
+    </aside>
+
+    <section class="gallery" id="gallery" aria-live="polite">
+      <!-- Cards will be injected here -->
+    </section>
+  </main>
+
+  <footer class="footer">
+    Built with ❤️ and Supabase.
+  </footer>
+
+  <!-- Modals -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+
+  <template id="cardTemplate">
+    <article class="card">
+      <img class="card-img" alt="">
+      <div class="card-body">
+        <h4 class="card-title"></h4>
+        <p class="card-meta"></p>
+        <div class="card-actions">
+          <div class="rating" data-rating="0"></div>
+          <button class="btn favorite-btn">♡</button>
+          <button class="btn comment-btn">💬</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="js/supabase.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/app.js"></script>
+>>>>>>> d5cd62e (Actualizado)
 </body>
 </html>

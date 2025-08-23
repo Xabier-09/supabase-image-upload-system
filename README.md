@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Galería de Imágenes con Supabase
 
 Este proyecto es un sistema completo de galería de imágenes construido con Supabase. Permite a los usuarios subir, gestionar y compartir imágenes, así como interactuar con ellas a través de un sistema de valoraciones, comentarios y favoritos.
@@ -53,3 +54,21 @@ Las contribuciones son bienvenidas. Si deseas contribuir, por favor abre un issu
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+=======
+Nova Gallery - Supabase Image Platform (Reinvented)
+
+Setup:
+1. Create Supabase project.
+2. In Storage create bucket named 'images' (public if you want direct URLs).
+3. Run sql/setup.sql in Supabase SQL editor.
+4. Edit js/supabase.js and replace SUPABASE_URL and SUPABASE_ANON_KEY.
+5. Serve index.html with a static server.
+
+Files:
+- index.html
+- css/styles.css
+- js/supabase.js
+- js/utils.js
+- js/app.js
+- sql/setup.sql
+>>>>>>> d5cd62e (Actualizado)
