@@ -16,8 +16,8 @@ try {
         console.log('Supabase client initialized with configuration');
     } else {
         // Fallback to environment variables or default values
-        const SUPABASE_URL = process.env.SUPABASE_URL || 'https://your-supabase-url.supabase.co';
-        const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || 'your-anon-key';
+        const SUPABASE_URL = process.env.SUPABASE_URL || 'https://jdtkgjunxdspmgbbmsdq.supabase.co';
+        const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpkdGtnanVueGRzcG1nYmJtc2RxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4ODU0NjYsImV4cCI6MjA3MTQ2MTQ2Nn0.mIN1BHien_ldObRWmWSTqZztK6byhFAx9uxOJUnDgqo';
         
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         window.supabaseClient = supabase;
@@ -160,7 +160,11 @@ const SupabaseService = {
         const to = from + limit - 1;
         query = query.range(from, to);
 
-        const { data, error } = await query;
+const { data, error } = await query;
+if (error) {
+    console.error('Error fetching images:', error);
+    return { data: null, error };
+}
         return { data, error };
     },
 

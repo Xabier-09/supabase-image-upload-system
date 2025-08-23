@@ -19,9 +19,10 @@ const AuthService = {
     // Setup event listeners for auth buttons
     setupEventListeners: () => {
         // Login/Register buttons
-        document.getElementById('loginBtn').addEventListener('click', () => {
-            AuthService.showAuthModal('login');
-        });
+document.getElementById('loginBtn').addEventListener('click', () => {
+    console.log('Login button clicked');
+    AuthService.showAuthModal('login');
+});
 
         document.getElementById('registerBtn').addEventListener('click', () => {
             AuthService.showAuthModal('register');
