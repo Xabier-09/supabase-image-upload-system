@@ -12,10 +12,13 @@ CREATE TABLE IF NOT EXISTS public.profiles (
 
 CREATE TABLE IF NOT EXISTS public.images (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid,
+  user_id uuid REFERENCES auth.users(id) ON DELETE CASCADE,
   title text,
   description text,
   file_name text,
+  category text DEFAULT 'general',
+  size integer,
+  mime_type text,
   created_at timestamptz DEFAULT now()
 );
 
@@ -24,7 +27,6 @@ CREATE TABLE IF NOT EXISTS public.ratings (
   image_id uuid REFERENCES public.images(id) ON DELETE CASCADE,
   user_id uuid REFERENCES auth.users(id) ON DELETE CASCADE,
   rating smallint CHECK (rating >=1 AND rating <=5),
-  comment text,
   created_at timestamptz DEFAULT now(),
   UNIQUE (image_id, user_id)
 );
@@ -32,8 +34,8 @@ CREATE TABLE IF NOT EXISTS public.ratings (
 CREATE TABLE IF NOT EXISTS public.comments (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   image_id uuid REFERENCES public.images(id) ON DELETE CASCADE,
-  user_id uuid REFERENCES auth.users(id),
-  body text,
+  user_id uuid REFERENCES auth.users(id) ON DELETE CASCADE,
+  content text NOT NULL,
   created_at timestamptz DEFAULT now()
 );
 
@@ -44,11 +46,9 @@ CREATE TABLE IF NOT EXISTS public.favorites (
   PRIMARY KEY (user_id, image_id)
 );
 
+-- Remove the foreign key constraint that references profiles
 ALTER TABLE public.images
   DROP CONSTRAINT IF EXISTS images_user_id_fkey;
-ALTER TABLE public.images
-  ADD CONSTRAINT images_user_id_fkey
-  FOREIGN KEY (user_id) REFERENCES public.profiles(id) ON DELETE SET NULL;
 
 ALTER TABLE public.images ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.ratings ENABLE ROW LEVEL SECURITY;

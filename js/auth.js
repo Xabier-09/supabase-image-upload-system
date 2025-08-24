@@ -112,6 +112,12 @@ document.getElementById('loginBtn').addEventListener('click', () => {
         const email = form.querySelector('input[type="email"]').value;
         const password = form.querySelector('input[type="password"]').value;
 
+        // Validate email and password
+        if (!email || !password || !fullName) {
+            AuthService.showError('Por favor, completa todos los campos.');
+            return;
+        }
+
         const { data, error } = await SupabaseService.signUp(email, password, fullName);
 
         if (error) {
