@@ -1,6 +1,6 @@
 // Supabase Configuration - Replace with your actual Supabase URL and key
-const SUPABASE_URL = 'https://your-project.supabase.co';
-const SUPABASE_ANON_KEY = 'your-anon-key';
+const SUPABASE_URL = 'https://jdtkgjunxdspmgbbmsdq.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpkdGtnanVueGRzcG1nYmJtc2RxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4ODU0NjYsImV4cCI6MjA3MTQ2MTQ2Nn0.mIN1BHien_ldObRWmWSTqZztK6byhFAx9uxOJUnDgqo';
 
 // Initialize Supabase client
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -63,8 +63,30 @@ const elements = {
     themeToggle: document.getElementById('themeToggle')
 };
 
+// Test Supabase connection
+async function testSupabaseConnection() {
+    try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error) {
+            console.error('Supabase connection error:', error);
+            return false;
+        }
+        console.log('Supabase connection successful');
+        return true;
+    } catch (error) {
+        console.error('Supabase connection test failed:', error);
+        return false;
+    }
+}
+
 // Initialize application
 async function initApp() {
+    // Test connection first
+    const isConnected = await testSupabaseConnection();
+    if (!isConnected) {
+        showNotification('Error de conexión. Verifica tu conexión a internet.', 'error');
+    }
+    
     await checkAuthState();
     await fetchImages();
     setupEventListeners();
@@ -144,28 +166,36 @@ async function fetchImages() {
 
 // Display images in gallery
 function displayImages(imagesToDisplay) {
-    if (imagesToDisplay.length === 0) {
+    if (!imagesToDisplay || imagesToDisplay.length === 0) {
         elements.galleryGrid.innerHTML = '<div class="loading">No se encontraron imágenes</div>';
         return;
     }
 
-    elements.galleryGrid.innerHTML = imagesToDisplay.map(image => `
-        <div class="gallery-item" data-image-id="${image.id}">
-            <img src="${image.file_name}" alt="${image.title}" class="gallery-image">
+    elements.galleryGrid.innerHTML = imagesToDisplay.map(image => {
+        const id = image?.id ? String(image.id) : '';
+        const src = image?.file_name || '';
+        const title = image?.title || '';
+        const author = image?.profiles?.username || 'Usuario';
+        const createdAt = image?.created_at ? formatDate(image.created_at) : '';
+
+        return `
+        <div class="gallery-item" data-image-id="${id}">
+            <img src="${src}" alt="${title}" class="gallery-image">
             <div class="gallery-info">
-                <h3 class="gallery-title">${image.title}</h3>
+                <h3 class="gallery-title">${title}</h3>
                 <div class="gallery-meta">
-                    <span>Por ${image.profiles?.username || 'Usuario'}</span>
-                    <span>${formatDate(image.created_at)}</span>
+                    <span>Por ${author}</span>
+                    <span>${createdAt}</span>
                 </div>
                 <div class="gallery-actions">
-                    <button class="btn btn-icon" onclick="viewImage('${image.id}')">
+                    <button class="btn btn-icon" onclick="viewImage('${id}')">
                         <i class="fas fa-eye"></i>
                     </button>
                 </div>
             </div>
         </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 // View image details
@@ -361,7 +391,13 @@ async function handleRegister(e) {
         showNotification('Registro exitoso. Verifica tu email.', 'success');
         elements.authModal.classList.add('hidden');
     } catch (error) {
-        showNotification('Error al registrarse: ' + error.message, 'error');
+        console.error('Error during registration:', error); // Log detailed error
+        // Check if the error is the specific database error
+        if (error.message && error.message.includes('Database error saving new user')) {
+            showNotification('Error al registrarse. Hubo un problema con la base de datos. Por favor, intenta nuevamente más tarde.', 'error');
+        } else {
+            showNotification('Error al registrarse. Por favor, verifica tus datos e intenta nuevamente.', 'error');
+        }
     }
 }
 
